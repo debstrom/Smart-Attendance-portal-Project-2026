@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Student Portal – Login</title>
+
+  <!-- Tab favicon linking to UITS Wikipedia -->
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/en/thumb/b/b5/University_of_Information_Technology_and_Sciences_Seal.png/120px-University_of_Information_Technology_and_Sciences_Seal.png" />
+
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
@@ -26,7 +30,9 @@
       <div class="left-inner">
         <div class="logo-wrap">
           <div class="logo-shield">
-            <img class="uits-logo" src="/University_of_Information_Technology_and_Sciences_Seal.png" alt="">
+            <a href="https://en.wikipedia.org/wiki/University_of_Information_Technology_and_Sciences" target="_blank" rel="noopener noreferrer">
+              <img class="uits-logo" src="/University_of_Information_Technology_and_Sciences_Seal.png" alt="UITS Logo" />
+            </a>
           </div>
         </div>
         <p class="welcome-label">WELCOME TO</p>
@@ -64,7 +70,7 @@
           </div>
         </div>
       </div>
-      <p class="footer-copy">© 2026 University of Information Technology and Sciences . All rights reserved.</p>
+      <p class="footer-copy">© 2026 University of Information Technology and Sciences. All rights reserved.</p>
     </div>
 
     <!-- RIGHT PANEL -->
@@ -147,7 +153,7 @@
           <div class="input-group">
             <span class="input-icon">🔒</span>
             <input type="password" id="signupPass2" placeholder="Confirm Password" />
-            <butto2n class="eye-btn" onclick="togglePw('signupPass2', this)">👁️</button>
+            <button class="eye-btn" onclick="togglePw('signupPass2', this)">👁️</button>
           </div>
           <button class="btn-primary" onclick="handleSignup()">CREATE ACCOUNT</button>
           <p class="bottom-text">Already have an account? <a href="#" class="link-blue" onclick="switchTab('login'); return false;">Login here</a></p>

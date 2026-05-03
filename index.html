@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Portal – Login</title>
+  <title>Smart Attendance Portal </Portal> – Login</title>
+
+  <!-- Tab favicon linking to UITS Wikipedia -->
+  <link rel="icon" type="image/png" href="/University_of_Information_Technology_and_Sciences_Seal.png" />
+
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
@@ -26,7 +30,9 @@
       <div class="left-inner">
         <div class="logo-wrap">
           <div class="logo-shield">
-            <img class="uits-logo" src="/University_of_Information_Technology_and_Sciences_Seal.png" alt="">
+            <a href="https://en.wikipedia.org/wiki/University_of_Information_Technology_and_Sciences" target="_blank" rel="noopener noreferrer">
+              <img class="uits-logo" src="/University_of_Information_Technology_and_Sciences_Seal.png" alt="UITS Logo" />
+            </a>
           </div>
         </div>
         <p class="welcome-label">WELCOME TO</p>
@@ -64,7 +70,7 @@
           </div>
         </div>
       </div>
-      <p class="footer-copy">© 2026 University of Information Technology and Sciences . All rights reserved.</p>
+      <p class="footer-copy">© 2026 University of Information Technology and Sciences. All rights reserved.</p>
     </div>
 
     <!-- RIGHT PANEL -->
@@ -109,10 +115,17 @@
             <label class="check-label">
               <input type="checkbox" checked /> Remember Me
             </label>
-            <a href="#" class="link-blue">Forgot Password?</a>
+            <a href="#" class="link-blue" onclick="openForgotPassword(); return false;">Forgot Password?</a>
           </div>
           <button class="btn-primary" onclick="handleLogin()">LOGIN</button>
-          <p class="bottom-text">Don't have an account? <a href="#" class="link-blue" onclick="switchTab('signup'); return false;">Contact your administrator</a></p>
+
+          <!-- Teacher admin notice (hidden by default) -->
+          <div id="adminNotice" style="display:none; margin-top:12px; background:var(--blue-light); border:1px solid var(--blue); border-radius:10px; padding:10px 14px; font-size:12.5px; color:var(--blue); text-align:center;">
+            🏫 Teacher accounts are managed by the administrator.
+            <a href="#" class="link-blue" style="font-size:12.5px;" onclick="openAdminInfo(); return false;">Learn more</a>
+          </div>
+
+          <p class="bottom-text">Don't have an account? <a href="#" class="link-blue" onclick="switchTab('signup'); return false;">Sign up here</a></p>
         </div>
 
         <!-- SIGNUP FORM -->
@@ -147,7 +160,7 @@
           <div class="input-group">
             <span class="input-icon">🔒</span>
             <input type="password" id="signupPass2" placeholder="Confirm Password" />
-            <butto2n class="eye-btn" onclick="togglePw('signupPass2', this)">👁️</button>
+            <button class="eye-btn" onclick="togglePw('signupPass2', this)">👁️</button>
           </div>
           <button class="btn-primary" onclick="handleSignup()">CREATE ACCOUNT</button>
           <p class="bottom-text">Already have an account? <a href="#" class="link-blue" onclick="switchTab('login'); return false;">Login here</a></p>
@@ -157,6 +170,40 @@
         <div id="toast" class="toast"></div>
 
       </div>
+    </div>
+  </div>
+
+  <!-- ===== FORGOT PASSWORD MODAL ===== -->
+  <div id="forgotModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:18px; padding:32px 28px; width:100%; max-width:380px; box-shadow:var(--shadow); position:relative;">
+      <div style="font-size:36px; text-align:center; margin-bottom:8px;">🔑</div>
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; text-align:center; color:var(--text-primary); margin-bottom:6px;">Forgot Password?</h3>
+      <p style="font-size:13px; color:var(--text-secondary); text-align:center; margin-bottom:20px;">Enter your email and we'll send you a reset link.</p>
+      <div class="input-group">
+        <span class="input-icon">✉️</span>
+        <input type="email" id="forgotEmail" placeholder="Your email address" />
+      </div>
+      <button class="btn-primary" style="margin-top:8px;" onclick="submitForgotPassword()">SEND RESET LINK</button>
+      <p style="font-size:13px; color:var(--text-secondary); text-align:center; margin-top:14px;">
+        <a href="#" class="link-blue" onclick="hideModal('forgotModal'); return false;">← Back to Login</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== TEACHER ADMIN MODAL ===== -->
+  <div id="adminModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:18px; padding:32px 28px; width:100%; max-width:400px; box-shadow:var(--shadow); position:relative;">
+      <div style="font-size:36px; text-align:center; margin-bottom:8px;">🏫</div>
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; text-align:center; color:var(--text-primary); margin-bottom:6px;">Teacher Account Access</h3>
+      <p style="font-size:13.5px; color:var(--text-secondary); text-align:center; margin-bottom:20px; line-height:1.6;">Teacher and administrative accounts are created and managed by the <strong style="color:var(--text-primary);">UITS System Administrator</strong>.</p>
+      <div style="background:var(--blue-light); border:1px solid var(--blue); border-radius:10px; padding:14px 16px; margin-bottom:20px;">
+        <p style="font-size:13px; color:var(--blue); line-height:1.6; margin:0;">
+          📧 &nbsp;Contact: <strong>admin@uits.edu.bd</strong><br/>
+          📞 &nbsp;Phone: <strong>+880 2-XXXX-XXXX</strong><br/>
+          🕐 &nbsp;Office Hours: Sat–Thu, 9AM–5PM
+        </p>
+      </div>
+      <button class="btn-primary" onclick="hideModal('adminModal')">Got it</button>
     </div>
   </div>
 

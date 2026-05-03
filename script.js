@@ -129,6 +129,14 @@ function handleLogin() {
     return;
   }
 
+  // Show success toast then redirect to dashboard
+  const roleLabel = currentRole === 'student' ? 'Student' : 'Teacher';
+  showToast(`✅ Welcome! Logging you in as ${roleLabel}...`);
+
+  setTimeout(() => {
+    window.location.href = 'dashboard.html';
+  }, 1500);
+}
   // Simulate login success
   const roleLabel = currentRole === 'student' ? 'Student' : 'Teacher';
   showToast(`✅ Welcome! Logging you in as ${roleLabel}...`);
